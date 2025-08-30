@@ -39,12 +39,12 @@ const data = [
 export default function Chart_Section() {
     return (
 
-        <div className="h-[290] border border-gray-800  rounded-lg bg-gray-900/40 ml-3 w-full">
+        <div className="h-[300px] relative mt-2  w-full rounded-lg  z-0 -ml-6 md:w-[80%]">
             <ResponsiveContainer>
-                <LineChart width={500} height={300} data={data}>
+                <LineChart width={500} height={300} data={data}  margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
                     <XAxis dataKey="date" />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip/>
                     <Line type="monotone" dataKey="price" stroke="#8884d8" />
                 </LineChart>
             </ResponsiveContainer>

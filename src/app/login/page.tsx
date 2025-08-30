@@ -1,16 +1,16 @@
 "use client";
-
 import { useState } from "react";
 
 export default function AuthPage() {
+
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 px-4">
-      <div className="bg-gray-800/80 backdrop-blur-md shadow-2xl rounded-2xl p-8 w-full max-w-md">
-        
+    <div className="flex items-center justify-center min-h-screen  px-4">
+      <div className="bg-gray-900/70  shadow-2xl rounded-2xl p-8 w-100">
+
         <h2 className="text-3xl font-extrabold text-green-400 text-center mb-8">
-          {isLogin ? "Welcome Back 👋" : "Create Account 🚀"}
+          {isLogin ? "Welcome Back " : "Create Account "}
         </h2>
 
         <form className="space-y-6">
@@ -19,7 +19,7 @@ export default function AuthPage() {
               <input
                 type="text"
                 id="name"
-                className="peer w-full px-4 pt-5 pb-2 rounded-lg bg-gray-700 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400"
+                className="peer w-full px-4 py-2 rounded-lg bg-gray-800 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400"
                 placeholder="Name"
               />
               <label
@@ -35,7 +35,7 @@ export default function AuthPage() {
             <input
               type="email"
               id="email"
-              className="peer w-full px-4 pt-5 pb-2 rounded-lg bg-gray-700 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="peer w-full px-4 pt-5 pb-2 rounded-lg bg-gray-800 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400"
               placeholder="Email"
             />
             <label
@@ -50,7 +50,7 @@ export default function AuthPage() {
             <input
               type="password"
               id="password"
-              className="peer w-full px-4 pt-5 pb-2 rounded-lg bg-gray-700 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400"
+              className="peer w-full px-4 pt-5 pb-2 rounded-lg bg-gray-800 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-400"
               placeholder="Password"
             />
             <label

@@ -23,39 +23,35 @@ model User {
 }
 
 model Stock {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
   symbol       String
   name         String
   exchange     String
+  price        Float
   transactions Transaction[]
   currentPrice Float
 }
 
 model Transaction {
-  id        String          @id @default(auto()) @map("_id") @db.ObjectId
-  user      User            @relation(fields: [userId], references: [id])
-  userId    String          @db.ObjectId
-  stock     Stock           @relation(fields: [stockId], references: [id])
-  stockId   String          @db.ObjectId
-  type      TransactionType
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @db.ObjectId
+  stock     Stock    @relation(fields: [stockId], references: [id])
+  stockId   String   @db.ObjectId
+  type      String
   quantity  Int
   price     Float
   total     Float
-  createdAt DateTime        @default(now())
+  createdAt DateTime @default(now())
 }
 
 model StockHistory {
-  id      String   @id @map("_id") @default(auto()) @db.ObjectId
-  stockId String?  
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  stockId String?
   date    DateTime
   open    Float
   high    Float
   low     Float
   close   Float
   volume  Int
-}
-
-enum TransactionType {
-  BUY
-  SELL
 }

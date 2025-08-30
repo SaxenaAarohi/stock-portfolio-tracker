@@ -8,14 +8,14 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 interface CandleDataPoint {
     x: number | string | Date;
-    y: [number, number, number, number]; 
+    y: [number, number, number, number];
 }
 
 interface CandlechartProps {
     data: CandleDataPoint[];
 }
 
-const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
+const Candlechart: React.FC<CandlechartProps> = ({ data, stock }) => {
     const formatted = data.map((d) => ({
         x: new Date(d.date),
         y: [d.open, d.high, d.low, d.close],
@@ -29,7 +29,7 @@ const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
                 show: false,
             },
             zoom: {
-                enabled: false, 
+                enabled: false,
             },
 
         },
@@ -49,10 +49,10 @@ const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
             }
         },
         yaxis: {
-        
+
             labels: {
                 style: {
-                    colors: '#ffffff', 
+                    colors: '#ffffff',
                     fontSize: '12px',
                 },
             },
@@ -65,7 +65,7 @@ const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
         }, yaxis: {
             labels: {
                 style: {
-                    colors: '#ffffff', 
+                    colors: '#ffffff',
                     fontSize: '12px',
                 },
             },
@@ -78,13 +78,6 @@ const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
         },
         tooltip: {
             theme: 'dark',
-        },
-        title: {
-            text: 'Candlestick Chart',
-            style: {
-                color: '#ffffff', // ✅ Title color
-                fontSize: '16px',
-            },
         },
         legend: {
             labels: {
@@ -100,13 +93,16 @@ const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
     ];
 
     return (
-        <ReactApexChart
-            options={options}
-            series={series}
-            type="candlestick"
-            height={300}
-            width={900}
-        />
+        <div className='md:w-[1000px] w-[380px]'>
+            <ReactApexChart
+                options={options}
+                series={series}
+                type="candlestick"
+                height={300}
+                width="100%"
+            />
+        </div>
+
     );
 };
 

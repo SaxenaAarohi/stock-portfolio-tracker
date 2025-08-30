@@ -1,72 +1,92 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { FaChartLine, FaNewspaper, FaTachometerAlt, FaBars, FaTimes } from "react-icons/fa";
+import { FiPieChart } from "react-icons/fi";
+
 export default function Sidebar() {
-    return (
-        <div className="w-[20%]" >
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
-            <div className="bg-gray-900/40 rounded-lg px-4 py-2 border border-gray-800">
-                <h1>PORTFOLIO</h1>
-                <p className="text-4xl py-3 ">$ 428,494</p>
+  const isActive = (path: string) => pathname === path;
 
-                <hr className="text-gray-600"></hr>
+  return (
+    <>
+      <button
+        className="md:hidden fixed top-4 left-0 z-50 text-white  p-2 rounded"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+      </button>
 
-                <div className="text-gray-400 flex gap-5 pt-5">
+      <div
+        className={`fixed md:static top-12 left-0 h-full md:h-[600px] w-56 md:bg-gray-900/40  bg-black border border-gray-800 text-white 
+    transform transition-transform duration-300 z-40
+    ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:my-4`}
+      >
 
-                    <div>
-                        <h3>Invested</h3>
-                        <p>$746,728</p>
-                    </div>
+        <nav className="space-y-6 ">
+          <h2 className="text-2xl font-bold mb-6 px-4 py-6 md:py-4">EquiTrack</h2>
 
-                    <div>
-                        <h3>Invested</h3>
-                        <p>$746,728</p>
-                    </div>
+          <ul className="flex flex-col mx-3">
+            <li
+              className={`rounded px-5 cursor-pointer py-3 ${isActive("/") ? "bg-gray-700 font-semibold" : "hover:bg-gray-700"
+                }`}
+            >
+              <Link href="/" className="flex gap-2 items-center" onClick={() => setIsOpen(false)}>
+                <FaTachometerAlt />
+                <p>Dashboard</p>
+              </Link>
+            </li>
 
-                    <div className="bg-green-400/30 rounded-full px-2 text-green-500 pr-1 mt-6">
-                        <p>76%</p>
-                    </div>
+            <li
+              className={`rounded px-5 cursor-pointer py-3 ${isActive("/holdings") ? "bg-gray-700 font-semibold" : "hover:bg-gray-700"
+                }`}
+            >
+              <Link href="/holdings" className="flex gap-2 items-center" onClick={() => setIsOpen(false)}>
+                <FiPieChart />
+                <p>Holdings</p>
+              </Link>
+            </li>
 
-                </div>
-            </div>
+            <li
+              className={`rounded px-5 cursor-pointer py-3 ${isActive("/stocklist") ? "bg-gray-700 font-semibold" : "hover:bg-gray-700"
+                }`}
+            >
+              <Link href="/stocklist" className="flex gap-2 items-center" onClick={() => setIsOpen(false)}>
+                <FaChartLine />
+                <p>Available Stock</p>
+              </Link>
+            </li>
 
-            <div className=" bg-gray-900/40 rounded-lg px-4 py-2 my-2 border border-gray-800">
+            <li
+              className={`rounded px-5 cursor-pointer py-3 ${isActive("/news") ? "bg-gray-700 font-semibold" : "hover:bg-gray-700"
+                }`}
+            >
+              <Link href="/news" className="flex gap-2 items-center" onClick={() => setIsOpen(false)}>
+                <FaNewspaper />
+                <p>News</p>
+              </Link>
+            </li>
 
-                <p>Day before yesterday</p>
+            <li className={`rounded px-5 cursor-pointer py-3 hover:bg-gray-700`}>
+              <div className="flex gap-2 items-center">
+                <FaChartLine />
+                <p>About</p>
+              </div>
+            </li>
+          </ul>
+        </nav>
 
-                <p>Yesterday</p>
-
-                <p>Today</p>
-
-            </div>
-
-            <div className=" bg-gray-900/40 rounded-lg px-4 py-2 border border-gray-800 ">
-
-                <h2>WatchList</h2>
-
-                <div className="flex flex-col mt-3 space-y-2 ">
-
-                    <div className="flex text-gray-500 ">
-                        <div className="  text-center flex-1">Company</div>
-                        <div className=" text-center flex-1">Share Price</div>
-                        <div className="  text-center flex-1">Valuation</div>
-                    </div>
-                    <div className="flex space-x-4">
-                        <div className="  text-center flex-1">Apple</div>
-                        <div className="  text-center flex-1">$47</div>
-                        <div className="  text-center flex-1">45%</div>
-                    </div>
-                    <div className="flex space-x-4">
-                        <div className="  text-center flex-1">Apple</div>
-                        <div className="  text-center flex-1">$47</div>
-                        <div className="  text-center flex-1">45%</div>
-                    </div>
-                    <div className="flex space-x-4">
-                        <div className="  text-center flex-1">Apple</div>
-                        <div className="  text-center flex-1">$47</div>
-                        <div className="  text-center flex-1">45%</div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    )
+        <Link
+          href="/login"
+          className="bg-blue-600 mx-2 hover:bg-blue-700 md:mt-50 text-center rounded p-2 font-semibold block"
+          onClick={() => setIsOpen(false)}
+        >
+          Login
+        </Link>
+      </div>
+    </>
+  );
 }
