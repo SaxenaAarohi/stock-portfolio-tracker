@@ -26,7 +26,7 @@ const holdings = [
 
 const HoldingsTable = () => {
   return (
-    <div className=" mr-4 w-[400px] md:w-full overflow-x-auto mt-1 ">
+    <div className=" mr-4 w-[90%] overflow-x-auto scrollbar-hide md:w-full  mt-1 ">
       <table className=" bg-gray-900/40 border rounded shadow">
         <thead>
           <tr className="bg-gray-800 text-gray-200 text-sm font-semibold text-left">

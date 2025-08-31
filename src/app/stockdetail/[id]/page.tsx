@@ -57,7 +57,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
             <div className="mt-23 overflow-y-hide">
 
 
-                <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[1000px] w-[380px]  ">
+                <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[1000px] w-[90%]  ">
 
                     <div>
 
@@ -81,7 +81,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
 
                 </div>
 
-                <main className="flex-1 md:-ml-4 ml-4  text-white bg-gray-70">
+                <main className="flex-1 md:-ml-4 ml-2  text-white bg-gray-70">
 
                     <section className="-mt-2 md:w-[1000px]  md-mr-0 md:mr-16 rounded shadow">
 
@@ -89,9 +89,9 @@ export default async function Detail({ params }: { params: { id: string } }) {
 
                     </section>
 
-                    <section className="flex md:flex-row flex-col justify-between w-[380px] md:w-[1000px] gap-4">
+                    <section className="flex md:flex-row flex-col justify-between w-[90%] md:w-[1000px] gap-4">
 
-                        <div className="bg-gray-900/40 border h-42 border-gray-700/30 ml-5 px-2 py-1 w-[360px] md:w-[800px] rounded shadow">
+                        <div className="bg-gray-900/40 border h-42 border-gray-700/30 ml-4 md:ml-5 px-2 md:mr-0  py-1 w-[98%] md:w-[800px] rounded shadow">
 
                             <h3 className="font-semibold mb-4">Analyst Ratings</h3>
 
@@ -123,7 +123,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
                             </div>
                         </div>
 
-                        <div className="bg-gray-900/40 md:ml-0 border h-42 ml-8 border-gray-700/30 px-2 py-1 w-[300px] rounded shadow">
+                        <div className="bg-gray-900/40 md:ml-0 border h-42 md:ml-8 ml-4 border-gray-700/30 px-2 py-1 w-[97%] rounded shadow">
 
                             <h3 className="font-semibold mb-1">Greed index</h3>
                             <StockGreedGauge value={value} />

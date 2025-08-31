@@ -84,7 +84,7 @@ const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
     ];
 
     return (
-        <div className='md:w-[1000px] w-[380px]'>
+        <div className='md:w-[1000px] w-[92%]'>
             <ReactApexChart
                 options={options}
                 series={series}

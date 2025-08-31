@@ -16,7 +16,7 @@ export default function Holding() {
         <Navbar title={title} line={des} />
       </div>
 
-      <div className="flex mt-24 w-[400px] md:w-full">
+      <div className="flex mt-24 w-[400px]  overflow-x-hidden  md:w-full">
 
         <div className="flex flex-col md:ml-0 ml-8 md:mr-0 mr-2 overflow-y-auto scrollbar-hide w-full">
           
