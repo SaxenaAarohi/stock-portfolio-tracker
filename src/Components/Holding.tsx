@@ -1,7 +1,5 @@
 "use client"
-import TransactionCalendar from "./CaleenderView"
 import HoldingsBarChart from "./CaleenderView"
-import CalendarView from "./CaleenderView"
 import Navbar from "./Navbar"
 import StaticPieChart from "./Piechart"
 import HoldingsTable from "./Table"

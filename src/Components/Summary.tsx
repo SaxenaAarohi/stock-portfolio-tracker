@@ -1,15 +1,22 @@
-//@ts-nocheck
 "use client"
 import { useEffect, useState } from "react";
+
+type transcation = {
+    total : number,
+   quantity : number,
+    stock : {
+        price : number
+    }
+}
 
 export default function Summary() {
     const [investedamount, setInvestedamount] = useState(0);
     const [currentamount, setCurrentamount] = useState(0);
-    const [day1return, setDay1Return] = useState<number | null>(3.5);
-    const [day2return, setDay2Return] = useState<number | null>(-2.4);
-    const [day3return, setDay3Return] = useState<number | null>(12.54);
+    const [day1return, setDay1Return] = useState<number>(3.5);
+    const [day2return, setDay2Return] = useState<number>(-2.4);
+    const [day3return, setDay3Return] = useState<number>(12.54);
 
-    function Arrow({ value }) {
+    function Arrow({ value }: {value : number}) {
         if (value > 0) {
             return <span className="text-green-600 ml-2">▲</span>;
         } else {
@@ -20,15 +27,15 @@ export default function Summary() {
     useEffect(() => {
         async function getdata() {
 
-            const data = await fetch('http://localhost:3000/api/transcation');
-            const res = await data.json();
-
-            const totalInvested = res.data.reduce((acc, tx) => {
+            const data  = await fetch('http://localhost:3000/api/transcation');
+            const res  = await data.json();
+            const trans  = res.data;
+            const totalInvested = trans.reduce((acc : number, tx: transcation) => {
                 return (acc + tx.total);
             }, 0);
             setInvestedamount(totalInvested.toFixed(2));
 
-            const totalCurrent = res.data.reduce((acc, tx) => {
+            const totalCurrent = trans.reduce((acc : number, tx :transcation )  => {
                 return acc + (tx.quantity * tx.stock.price);
             }
                 , 0);
@@ -40,8 +47,8 @@ export default function Summary() {
         getdata();
     }, []);
 
-    const profit = (currentamount - investedamount).toFixed(2);
-    const profitpercent = ((profit / investedamount) * 100).toFixed(2);
+    const profit = Number((currentamount - investedamount).toFixed(2));
+    const profitpercent  = Number(((profit / investedamount) * 100).toFixed(2));
 
     return (
         <div >

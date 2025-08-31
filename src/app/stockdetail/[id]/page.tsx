@@ -1,9 +1,8 @@
-//@ts-nocheck
-
 import Candlechart from "@/Components/Candlechart";
 import StockGreedGauge from "@/Components/Greed";
 import Navbar from "@/Components/Navbar";
 import prismaclient from "@/services/prisma";
+import { symbol } from "d3";
 import Link from "next/link";
 
 function generateRandomPercentages() {
@@ -13,12 +12,25 @@ function generateRandomPercentages() {
     return { buy, hold, sell };
 }
 
-export default async function Detail({ params }) {
+type Stock = {
+    id : string
+    name : string,
+    exchange : string,
+    symbol:string
+    price : number | null,
+    currentPrice : number,
+} | null;
+
+type StockDetail = (Stock & {
+    transactions: { quantity: number }[];
+}) | null;
+
+export default async function Detail({ params }: { params: { id: string } }) {
     const id = params.id;
 
     const res = await fetch("http://localhost:3000/api/stocks/" + id);
     const data = await res.json();
-    const stockdetail = await prismaclient.stock.findUnique({
+    const stockdetail :  StockDetail | null = await prismaclient.stock.findUnique({
         where: {
             id: id
         },
@@ -30,6 +42,11 @@ export default async function Detail({ params }) {
             }
         }
     });
+      if(!stockdetail){
+       return (
+        <p>Loading.....</p>
+       )
+      }
     const quan = stockdetail.transactions[0]?.quantity || 0;
 
     const { buy, hold, sell } = generateRandomPercentages();
@@ -60,7 +77,7 @@ export default async function Detail({ params }) {
 
                         <span className="text-xl">${stockdetail?.price}</span>
                         <span className="font-semibold text-green-600">▲ 1.50%</span>
-                    
+
                     </div>
 
                     <div>
@@ -75,11 +92,11 @@ export default async function Detail({ params }) {
                 </div>
 
                 <main className="flex-1 md:-ml-4 ml-4  text-white bg-gray-70">
-                    
+
                     <section className="-mt-2 md:w-[1000px]  md-mr-0 md:mr-16 rounded shadow">
-                      
-                        <Candlechart data={data.data} stock={stockdetail} />
-                    
+
+                        <Candlechart data={data.data}  />
+
                     </section>
 
                     <section className="flex md:flex-row flex-col justify-between w-[380px] md:w-[1000px] gap-4">

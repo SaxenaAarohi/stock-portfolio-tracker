@@ -1,15 +1,28 @@
-//@ts-nocheck
 "use client"
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent, ChangeEventHandler } from 'react';
 import Navbar from './Navbar';
+import { promises } from 'dns';
 
-export default function ProductForm({ stock }) {
-    const [name, setName] = useState(stock?.name || '');
-    const [exchange, setExchange] = useState(stock?.exchange || '');
-    const [quantity, setQuantity] = useState(0);
+type Stock = {
+    id : string
+    name : string,
+    exchange : string,
+    currentPrice : number,
+} | null
+
+export default function ProductForm({ stock } : {stock : Stock}) {
+
+if(!stock){
+    return <p>Loading...</p>
+}
+
+    const [name, setName] = useState<string>(stock?.name || '');
+    const [exchange, setExchange] = useState<string>(stock?.exchange || '');
+    const [quantity, setQuantity] = useState<number>(0);
     const currentPrice = stock?.currentPrice || 0;
-    const [total, setTotal] = useState(0);
-    const [transactionType, setTransactionType] = useState('buy');
+    const [total, setTotal] = useState<number>(0);
+    const [transactionType, setTransactionType] = useState<'buy' | 'sell'>('buy');
+
     const title = "Transcation";
     const des = "Record your trades, track your gains.";
 
@@ -17,21 +30,21 @@ export default function ProductForm({ stock }) {
         setTotal(quantity * currentPrice);
     }, [quantity]);
 
-    const handleQuantityChange = (e) => {
+    const handleQuantityChange = (e:any) : void=> {
         setQuantity(e.target.value);
     };
-
-    const handleSubmit = async (e) => {
+ 
+    const handleSubmit = async (e:any ) :Promise<void> => {
         e.preventDefault();
         if (quantity > 0) {
             const response = await fetch('/api/transcation', {
                 method: 'POST',
                 body: JSON.stringify({
-                    quantity: parseInt(quantity),
-                    price: parseFloat(currentPrice),
+                    quantity,
+                    price: currentPrice,
                     type: transactionType.toUpperCase(),
                     stockId: stock.id,
-                    total: parseFloat(total),
+                    total: total,
                     createdAt: new Date(),
                 }),
 
@@ -119,7 +132,7 @@ export default function ProductForm({ stock }) {
                         <select
                             id="transactionType"
                             value={transactionType}
-                            onChange={(e) => setTransactionType(e.target.value)}
+                            onChange={(e : ChangeEvent<HTMLSelectElement>) => setTransactionType(e.target.value as "buy" | "sell")}
                             className="w-full p-1  mt-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         >
                             <option value="buy">Buy</option>

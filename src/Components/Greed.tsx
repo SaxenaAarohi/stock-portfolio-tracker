@@ -1,9 +1,14 @@
-//@ts-nocheck
 "use client"
 import React from 'react';
 import GaugeComponent from 'react-gauge-component';
 
-function StockGreedGauge({ value, minValue = 0, maxValue = 100 }) {
+type StockGreedGaugeProps = {
+  value: number;          
+  minValue?: number;      
+  maxValue?: number;      
+};
+
+const StockGreedGauge : React.FC<StockGreedGaugeProps> = ({ value, minValue = 0, maxValue = 100 }) => {
   return (
     <GaugeComponent
       type="semicircle"

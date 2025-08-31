@@ -1,27 +1,31 @@
-//@ts-nocheck
 'use client';
 
 import React from 'react';
 import dynamic from 'next/dynamic';
-
+import { ApexOptions } from 'apexcharts';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 interface CandleDataPoint {
-    x: number | string | Date;
-    y: [number, number, number, number];
+    date: string | number | Date;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
 }
 
 interface CandlechartProps {
     data: CandleDataPoint[];
 }
 
-const Candlechart: React.FC<CandlechartProps> = ({ data, stock }) => {
+
+
+const Candlechart: React.FC<CandlechartProps> = ({ data }) => {
     const formatted = data.map((d) => ({
         x: new Date(d.date),
         y: [d.open, d.high, d.low, d.close],
     }));
 
-    const options = {
+    const options : ApexOptions  = {
         chart: {
             type: 'candlestick',
             height: 350,
@@ -62,26 +66,13 @@ const Candlechart: React.FC<CandlechartProps> = ({ data, stock }) => {
             axisTicks: {
                 color: '#888888',
             },
-        }, yaxis: {
-            labels: {
-                style: {
-                    colors: '#ffffff',
-                    fontSize: '12px',
-                },
-            },
-            axisBorder: {
-                color: '#888888',
-            },
-            axisTicks: {
-                color: '#888888',
-            },
         },
         tooltip: {
             theme: 'dark',
         },
         legend: {
             labels: {
-                colors: '#ffffff', // ✅ Legend label color
+                colors: '#ffffff',
             },
         },
     };
