@@ -26,7 +26,7 @@ type StockDetail = (Stock
 export default async function Detail({ params }: { params: { id: string } }) {
     const id = params.id;
 
-    const res = await fetch("http://localhost:3000/api/stocks/" + id);
+    const res = await fetch("https://stock-portfolio-tracker-navy.vercel.app/api/stocks/" + id);
     const data = await res.json();
     const stockdetail :  StockDetail | null = await prismaclient.stock.findUnique({
         where: {
