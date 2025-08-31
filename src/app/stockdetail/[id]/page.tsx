@@ -2,7 +2,6 @@ import Candlechart from "@/Components/Candlechart";
 import StockGreedGauge from "@/Components/Greed";
 import Navbar from "@/Components/Navbar";
 import prismaclient from "@/services/prisma";
-import { symbol } from "d3";
 import Link from "next/link";
 
 function generateRandomPercentages() {
@@ -21,9 +20,8 @@ type Stock = {
     currentPrice : number,
 } | null;
 
-type StockDetail = (Stock & {
-    transactions: { quantity: number }[];
-}) | null;
+type StockDetail = (Stock 
+) | null;
 
 export default async function Detail({ params }: { params: { id: string } }) {
     const id = params.id;
@@ -34,21 +32,13 @@ export default async function Detail({ params }: { params: { id: string } }) {
         where: {
             id: id
         },
-        include: {
-            transactions: {
-                select: {
-                    quantity: true,
-                }
-            }
-        }
+     
     });
       if(!stockdetail){
        return (
         <p>Loading.....</p>
        )
       }
-    const quan = stockdetail.transactions[0]?.quantity || 0;
-
     const { buy, hold, sell } = generateRandomPercentages();
     const value = Math.floor(Math.random() * 91) + 10;
 
@@ -64,7 +54,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
                 <Navbar title={title} line={des} />
             </div>
 
-            <div className="mt-23    overflow-y-hide">
+            <div className="mt-23 overflow-y-hide">
 
 
                 <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[1000px] w-[380px]  ">

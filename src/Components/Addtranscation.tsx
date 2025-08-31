@@ -1,20 +1,17 @@
 "use client"
-import { useState, useEffect, ChangeEvent, ChangeEventHandler } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Navbar from './Navbar';
-import { promises } from 'dns';
 
 type Stock = {
-    id : string
-    name : string,
-    exchange : string,
-    currentPrice : number,
-} | null
+    id: string
+    name: string,
+    exchange: string,
+    symbol : string,
+    price : number | null,
+    currentPrice: number,
+} 
 
-export default function ProductForm({ stock } : {stock : Stock}) {
-
-if(!stock){
-    return <p>Loading...</p>
-}
+export default function ProductForm({ stock }: { stock: Stock | null }) {
 
     const [name, setName] = useState<string>(stock?.name || '');
     const [exchange, setExchange] = useState<string>(stock?.exchange || '');
@@ -28,13 +25,13 @@ if(!stock){
 
     useEffect(() => {
         setTotal(quantity * currentPrice);
-    }, [quantity]);
+    }, [quantity,currentPrice]);
 
-    const handleQuantityChange = (e:any) : void=> {
-        setQuantity(e.target.value);
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setQuantity(Number(e.target.value));
     };
- 
-    const handleSubmit = async (e:any ) :Promise<void> => {
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         if (quantity > 0) {
             const response = await fetch('/api/transcation', {
@@ -43,7 +40,7 @@ if(!stock){
                     quantity,
                     price: currentPrice,
                     type: transactionType.toUpperCase(),
-                    stockId: stock.id,
+                    stockId: stock?.id,
                     total: total,
                     createdAt: new Date(),
                 }),
@@ -66,92 +63,93 @@ if(!stock){
         }
     }
 
+    if(!stock) return <p>Loading...</p>;
     return (
         <div className="flex justify-center items-center min-h-screen ">
-            
-            <Navbar title={title} line={des}/>
 
-                <form onSubmit={handleSubmit} className="space-y-6 w-full" >
+            <Navbar title={title} line={des} />
 
-                    <div className='flex gap-80'>
+            <form onSubmit={handleSubmit} className="space-y-6 w-full" >
 
-                        <div>
-                            <label htmlFor="name" className=" text-sm font-medium  text-gray-200">Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                defaultValue={name}
-                                className="w-full  border border-gray-300 mt-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                            />
-                        </div>
+                <div className='flex gap-80'>
 
-                        <div>
-                            <label htmlFor="exchange" className=" text-sm font-medium text-gray-200">Exchange</label>
-                            <input
-                                type="text"
-                                id="exchange"
-                                defaultValue={exchange}
-                                className="w-full  p-1 border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                            />
-                        </div>
-
-                    </div>
-
-
-                    <div className='flex gap-74'>
-                       
-                        <div>
-                            <label htmlFor="quantity" className="text-sm font-medium text-gray-200">Quantity</label>
-                            <input
-                                type="number"
-                                id="quantity"
-                                value={quantity}
-                                onChange={handleQuantityChange}
-                                className="w-full p-1 border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="currentPrice" className=" text-sm font-medium text-gray-200">Current Price ($)</label>
-                            <input
-                                type="number"
-                                id="currentPrice"
-                                defaultValue={currentPrice}
-                                className="w-full p-1  border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                required
-                            />
-                        </div>
-
+                    <div>
+                        <label htmlFor="name" className=" text-sm font-medium  text-gray-200">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            defaultValue={name}
+                            className="w-full  border border-gray-300 mt-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
                     </div>
 
                     <div>
-                        <label htmlFor="transactionType" className=" text-sm font-medium text-gray-200">Transaction Type</label>
-                        <select
-                            id="transactionType"
-                            value={transactionType}
-                            onChange={(e : ChangeEvent<HTMLSelectElement>) => setTransactionType(e.target.value as "buy" | "sell")}
-                            className="w-full p-1  mt-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        >
-                            <option value="buy">Buy</option>
-                            <option value="sell">Sell</option>
-                        </select>
+                        <label htmlFor="exchange" className=" text-sm font-medium text-gray-200">Exchange</label>
+                        <input
+                            type="text"
+                            id="exchange"
+                            defaultValue={exchange}
+                            className="w-full  p-1 border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
+                    </div>
+
+                </div>
+
+
+                <div className='flex gap-74'>
+
+                    <div>
+                        <label htmlFor="quantity" className="text-sm font-medium text-gray-200">Quantity</label>
+                        <input
+                            type="number"
+                            id="quantity"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            className="w-full p-1 border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
                     </div>
 
                     <div>
-                        <h3 className="text-xl font-semibold text-gray-200">Total : ${total}</h3>
+                        <label htmlFor="currentPrice" className=" text-sm font-medium text-gray-200">Current Price ($)</label>
+                        <input
+                            type="number"
+                            id="currentPrice"
+                            defaultValue={currentPrice}
+                            className="w-full p-1  border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            required
+                        />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="w-[60%] py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-200"
+                </div>
+
+                <div>
+                    <label htmlFor="transactionType" className=" text-sm font-medium text-gray-200">Transaction Type</label>
+                    <select
+                        id="transactionType"
+                        value={transactionType}
+                        onChange={(e: ChangeEvent<HTMLSelectElement>) => setTransactionType(e.target.value as "buy" | "sell")}
+                        className="w-full p-1  mt-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
-                        Buy
-                    </button>
-                </form>
-           
+                        <option value="buy">Buy</option>
+                        <option value="sell">Sell</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h3 className="text-xl font-semibold text-gray-200">Total : ${total}</h3>
+                </div>
+
+                <button
+                    type="submit"
+                    className="w-[60%] py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-200"
+                >
+                    Buy
+                </button>
+            </form>
+
         </div>
     );
 }

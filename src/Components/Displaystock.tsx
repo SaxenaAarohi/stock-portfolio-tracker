@@ -5,7 +5,7 @@ type Stock = {
   id : string
   symbol: string;
   name: string;
-  price: number;
+  price: number | null;
   exchange: string;
   transactions: { quantity: number }[];
   currentPrice: number;
@@ -32,7 +32,7 @@ export default function Displaystock({ stock }: { stock: Stock }) {
 
       <div className="flex items-baseline justify-between">
         <div className="text-xl  text-white">
-          ${price.toFixed(2)}
+          ${price?.toFixed(2)}
         </div>
 
       </div>

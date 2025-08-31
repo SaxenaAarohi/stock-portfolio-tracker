@@ -1,13 +1,30 @@
 "use client"
 import Link from "next/link";
-export default function Temporary({ data }: any) {
+type Data = {
+  id : string,
+  price : number,
+  quantity : number,
+  total : number,
+  stock : {
+    id : string,
+    name : string,
+    price : number | null,
+    exchange: string; 
+    currentPrice: number
+  }
 
-  const buyprice = data.price.toFixed(2);
+}
+
+export default function Temporary({ data }: {data : Data}) {
+
+  const buyprice = Number(data.price.toFixed(2));
   const quantity = data.quantity;
   const total = data.total.toFixed(2);
-  const currprice = data.stock.price;
+  const currprice = data?.stock?.price || 0;
+
   const profit = ((((currprice * quantity) - buyprice) / buyprice) * 100).toFixed(2);
   const profitNum = parseFloat(profit);
+
   return (
    <Link
   href={`stockdetail/${data.stock.id}`}

@@ -22,7 +22,9 @@ const StaticPieChart = () => {
           cx="50%"
           cy="50%"
           outerRadius={90} 
-          label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(1)}%`}
+        label={({ name, percent }) =>
+  `${name}: ${percent != null ? (percent * 100).toFixed(1) : "0.0"}%`
+}
           dataKey="value"
         >
           {staticData.map((_, index) => (

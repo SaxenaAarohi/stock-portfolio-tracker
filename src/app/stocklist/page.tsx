@@ -1,6 +1,5 @@
 import Displaystock from "@/Components/Displaystock";
 import Navbar from "@/Components/Navbar";
-import Temporary from "@/Components/Temporary";
 import prismaclient from "@/services/prisma";
 
 export default async function Stocks() {

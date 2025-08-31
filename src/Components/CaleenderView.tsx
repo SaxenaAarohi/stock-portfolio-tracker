@@ -1,5 +1,5 @@
 'use client';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { Bar, BarChart, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 const holdings = [
   { ticker: 'AAPL', shares: 10, currentPrice: 175 },

@@ -1,8 +1,9 @@
 import Navbar from '@/Components/Navbar';
 import { news } from '../../constants/News';
+import Image from 'next/image';
+
 export default function News() {
 
-  
     const title = "Market News";
     const des = "Browse and explore current news of market. "
 
@@ -24,9 +25,12 @@ export default function News() {
         className="bg-gray-900/40 shadow-md rounded-sm border border-gray-700 flex items-center gap-6 p-4"
       >
         {item.imageUrl && (
-          <img
+          <Image
+          alt={item.title}
             src={item.imageUrl}
-            className="w-28 h-20   object-cover rounded-sm"
+            width={112}
+            height={80}
+            className=" object-cover rounded-sm"
           />
         )}
 

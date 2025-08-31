@@ -32,8 +32,8 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
         }
 
     }
-    catch (err: any) {
-        console.log(err.message);
+    catch (err: unknown) {
+        console.log(err);
         return NextResponse.json({
             success: false,
             message: "Id Not found"
