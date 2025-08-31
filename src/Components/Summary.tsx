@@ -27,7 +27,7 @@ export default function Summary() {
     useEffect(() => {
         async function getdata() {
 
-            const data  = await fetch('http://localhost:3000/api/transcation');
+            const data  = await fetch('https://stock-portfolio-tracker-navy.vercel.app/api/transcation');
             const res  = await data.json();
             const trans  = res.data;
             const totalInvested = trans.reduce((acc : number, tx: transcation) => {
