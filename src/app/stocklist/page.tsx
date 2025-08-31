@@ -26,9 +26,9 @@ export default async function Stocks() {
         <Navbar title={title} line={des}/>
       </div>
 
-      <div className=" h-screen md:ml-0 -ml-2 overflow-y-auto scrollbar-hide ">
+      <div className=" h-screen md:ml-0 -ml-1 overflow-y-auto scrollbar-hide ">
 
-        <div className="flex flex-wrap md:mt-24 mt-24  justify-center md:gap-2  gap-2  space-y-4 ">
+        <div className="flex flex-wrap md:mt-24 mt-24 gap-2  space-y-1">
           {stocks.map((stock) => (
             <Displaystock key={stock.id} stock={stock} />
           ))}
