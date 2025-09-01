@@ -37,9 +37,15 @@ const rawData = [
     { date: "Aug 31", price: 30 },
 ];
 
+interface DataPoint {
+  date: string;   
+  price: number;
+}
+
+
 export default function Chart_Section() {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<DataPoint[]>([]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
