@@ -36,20 +36,20 @@ export default function Holding() {
           
           <div className="flex md:flex-row flex-col md:gap-8 mb-4">
             {loadingCharts ? (
-              <div className="animate-pulse bg-gray-800 rounded-lg  mt-4 h-64 md:w-2/3 w-[320px]" />
+              <div className="animate-pulse bg-gray-800  mt-4 h-64 md:w-2/3 w-[320px]" />
             ) : (
               <HoldingsBarChart />
             )}
 
             {loadingPie ? (
-              <div className="animate-pulse bg-gray-800 mt-4 rounded-lg h-64 md:w-1/3 w-[320px]  -ml-4 mr-4" />
+              <div className="animate-pulse bg-gray-800 mt-4  h-64 md:w-1/3 w-[320px]  -ml-4 mr-4" />
             ) : (
               <StaticPieChart />
             )}
           </div>
 
           {loadingTable ? (
-            <div className="animate-pulse bg-gray-800 rounded-lg h-60 md:w-[98%]  w-[320px]" />
+            <div className="animate-pulse bg-gray-800  h-60 md:w-[98%]  w-[320px]" />
           ) : (
             <HoldingsTable />
           )}
