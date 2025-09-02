@@ -27,14 +27,15 @@ export default function Holding() {
 
   return (
     <div className="h-screen flex flex-col">
+      
       <div>
         <Navbar title={title} line={des} />
       </div>
 
-      <div className="flex mt-24 w-[400px] overflow-x-hidden md:w-full">
-        <div className="flex flex-col md:ml-0 ml-8 md:mr-0 mr-2 overflow-y-auto scrollbar-hide w-full">
+        <div className="flex flex-col md:mt-5 mt-3 overflow-x-hidden md:w-full md:ml-0 ml-0  md:mr-0 mr-2 overflow-y-auto scrollbar-hide w-full">
           
-          <div className="flex md:flex-row flex-col md:gap-8 mb-4">
+          <div className="flex md:flex-row flex-col md:gap-8 gap-2 mb-4">
+           
             {loadingCharts ? (
               <div className="animate-pulse bg-gray-800  mt-4 h-64 md:w-2/3 w-[320px]" />
             ) : (
@@ -42,10 +43,11 @@ export default function Holding() {
             )}
 
             {loadingPie ? (
-              <div className="animate-pulse bg-gray-800 mt-4  h-64 md:w-1/3 w-[320px]  -ml-4 mr-4" />
+              <div className="animate-pulse bg-gray-800 mt-4  h-64 md:w-1/3 w-[320px]  " />
             ) : (
               <StaticPieChart />
             )}
+
           </div>
 
           {loadingTable ? (
@@ -53,8 +55,9 @@ export default function Holding() {
           ) : (
             <HoldingsTable />
           )}
+
         </div>
-      </div>
+
     </div>
   );
 }

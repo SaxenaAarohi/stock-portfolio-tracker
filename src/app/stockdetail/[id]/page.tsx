@@ -54,7 +54,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
                 <Navbar title={title} line={des} />
             </div>
 
-            <div className="mt-23 overflow-y-hide">
+            <div className="mt-2  overflow-y-hidden ">
 
 
                 <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[1000px] w-[90%]  ">
@@ -83,7 +83,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
 
                 <main className="flex-1 md:-ml-4 ml-2  text-white bg-gray-70">
 
-                    <section className="-mt-2 md:w-[1000px]  md-mr-0 md:mr-16 rounded shadow">
+                    <section className="-mt-4 md:w-[1000px]  md-mr-0 md:mr-16 rounded shadow">
 
                         <Candlechart data={data.data}  />
 
@@ -92,6 +92,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
                   <AnalystRatings buy={buy} sell={sell} hold={hold} value={value}/>
                   
                 </main>
+
             </div>
         </div>
 

@@ -59,7 +59,7 @@ export default function Chart_Section() {
     return (
         <div className="h-[300px] relative mt-2 w-full rounded-lg z-0 -ml-6 md:w-[80%]">
             {loading ? (
-                <div className="h-full w-full bg-gray-800 rounded-lg animate-pulse" />
+                <div className="h-full w-[90%] bg-gray-800 md:ml-0 ml-10 rounded-lg animate-pulse" />
             ) : (
                 <ResponsiveContainer>
                     <LineChart
