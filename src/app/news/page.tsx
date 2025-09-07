@@ -22,7 +22,7 @@ export default function News() {
         <Navbar title={title} line={des} />
       </div>
 
-        <div className="space-y-3 mt-3 md:mr-5 mr-2 h-screen overflow-y-auto scrollbar-hide">
+        <div className="space-y-3 mt-3 md:mr-5 mr-2 md:ml-0 ml-2 h-screen overflow-y-auto scrollbar-hide">
           
           {loading
             ? Array.from({ length: 4 }).map((_, i) => (

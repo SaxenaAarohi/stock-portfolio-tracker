@@ -72,7 +72,7 @@ export default function Summary() {
     if (loading) {
 
         return (
-            <div className="bg-gray-900/40 rounded-sm px-4 py-4 border mr-2 border-gray-800 animate-pulse">
+            <div className="bg-gray-900/40 rounded-sm px-4 py-4 border mr-2 md:ml-0 ml-2 border-gray-800 animate-pulse">
                 <div className="h-6 w-20 bg-gray-700 rounded mb-4"></div>
                 <div className="h-10 w-32 bg-gray-700 rounded mb-6"></div>
                 <div className="h-4 w-full bg-gray-700 rounded mb-2"></div>
@@ -84,7 +84,7 @@ export default function Summary() {
 
     return (
         <div>
-            <div className="bg-gray-900/40 rounded-sm px-4 py-4 border mr-2 border-gray-800">
+            <div className="bg-gray-900/40 rounded-sm px-4 py-4 border mr-2 md:ml-0 ml-2 border-gray-800">
                 <h4 className="text-xs">PORTFOLIO</h4>
                 <p className="text-4xl py-3 ">$ {profit}</p>
 

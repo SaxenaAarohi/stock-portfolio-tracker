@@ -85,10 +85,10 @@ export default function Sidebar() {
           </ul>
         </nav>
 
-        <div className="flex flex-col ">
+        <div className="flex flex-col  ">
           <Link
             href="/login"
-            className="bg-blue-600 mx-2 mt-70 hover:bg-blue-700  text-center rounded p-2 font-semibold block"
+            className="bg-blue-600 mx-2 mt-120 md:mt-70 hover:bg-blue-700  text-center rounded p-2 font-semibold block"
             onClick={() => setIsOpen(false)}
           >
             Login

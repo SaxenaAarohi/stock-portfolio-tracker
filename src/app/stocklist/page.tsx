@@ -4,11 +4,6 @@ import prismaclient from "@/services/prisma";
 
 export default async function Stocks() {
 
-  // const user = await getuserfromcookies();
-  // if (!user) {
-  //   redirect("/login")
-  // }
-
   const stocks = await prismaclient.stock.findMany(
     {
       include: {
@@ -40,7 +35,7 @@ export default async function Stocks() {
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 
-        <div className="flex flex-wrap  mt-3  gap-2 md:gap-3  ">
+        <div className="flex flex-wrap  mt-3 justify-center md:justify-start gap-2 md:gap-3  ">
           {stocks.map((stock) => (
             <Displaystock key={stock.id} stock={stock} />
           ))}

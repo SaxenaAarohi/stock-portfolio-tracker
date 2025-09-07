@@ -93,9 +93,9 @@ export default async function Detail({ params }: { params: { id: string } }) {
 
                 </div>
 
-                <main className="flex-1 md:-ml-4 ml-2  text-white bg-gray-70">
+                <main className="flex-1 md:-ml-4 ml-5   text-white bg-gray-70">
 
-                    <section className="-mt-4 md:w-[1080px] rounded shadow">
+                    <section className="mt-2 md:-mt-4 md:w-[1080px] rounded shadow">
 
                         <Candlechart data={data.data} />
 

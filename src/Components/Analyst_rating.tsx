@@ -12,7 +12,7 @@ export default function AnalystRatings({ buy, hold, sell, value }: { buy: number
 
   if (loading) {
     return (
-      <section className="flex md:flex-row flex-col justify-between w-[90%] md:w-[1000px] gap-4">
+      <section className="flex md:flex-row flex-col items-center  justify-between w-[90%] md:w-[1000px] gap-4">
 
         <div className="bg-gray-900/40 border h-42 border-gray-700/30 ml-4 md:ml-5 px-2 md:mr-0 py-2 w-[98%] md:w-[1000px] rounded shadow animate-pulse">
           <div className="h-5 w-32 bg-gray-700 rounded mb-4 ml-2"></div>
@@ -47,7 +47,7 @@ export default function AnalystRatings({ buy, hold, sell, value }: { buy: number
   }
 
   return (
-    <section className="flex md:flex-row flex-col justify-between w-[90%] md:w-[1080px] gap-4">
+    <section className="flex md:flex-row flex-col items-center justify-between w-[90%] md:w-[1080px] gap-4">
 
       <div className="bg-gray-900/40 border h-42 border-gray-700/30 ml-4 md:ml-5 px-2 md:mr-0  py-1 w-[98%] md:w-[1000px] rounded shadow">
         <h3 className="font-semibold pt-2 px-2 mb-4">Analyst Ratings</h3>
@@ -79,7 +79,7 @@ export default function AnalystRatings({ buy, hold, sell, value }: { buy: number
         </div>
       </div>
 
-      <div className="bg-gray-900/40 md:ml-0 border md:w-[300px]  h-42 md:ml-2 ml-10 border-gray-700/30 px-2 py-1 w-[280px] rounded shadow">
+      <div className="bg-gray-900/40 md:ml-0 border md:w-[300px]  h-42 md:ml-2 ml-5 border-gray-700/30 px-2 py-1 w-[280px] rounded shadow">
         <h3 className="font-semibold pt-2 px-2 mb-1">Greed index</h3>
         <StockGreedGauge value={value} />
       </div>
