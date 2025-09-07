@@ -16,7 +16,7 @@ export default function Summary() {
     const [day1return, setDay1Return] = useState<number>(3.5);
     const [day2return, setDay2Return] = useState<number>(-2.4);
     const [day3return, setDay3Return] = useState<number>(12.54);
-    
+
     const [loading, setLoading] = useState(true);
 
     function Arrow({ value }: { value: number }) {
@@ -30,7 +30,9 @@ export default function Summary() {
     useEffect(() => {
         async function getdata() {
             try {
-                const data = await fetch("https://stock-portfolio-tracker-navy.vercel.app/api/transcation");
+
+                 const data = await fetch("https://stock-portfolio-tracker-navy.vercel.app/api/transcation");
+               // const data = await fetch("http://localhost:3000/api/transcation");
                 const res = await data.json();
                 const trans = res.data;
 
@@ -68,7 +70,7 @@ export default function Summary() {
             : 0;
 
     if (loading) {
-       
+
         return (
             <div className="bg-gray-900/40 rounded-sm px-4 py-4 border mr-2 border-gray-800 animate-pulse">
                 <div className="h-6 w-20 bg-gray-700 rounded mb-4"></div>
@@ -101,8 +103,8 @@ export default function Summary() {
 
                     <div
                         className={`${profit > 0
-                                ? "bg-green-400/30 text-green-200"
-                                : "bg-red-400/30 text-red-500"
+                            ? "bg-green-400/30 text-green-200"
+                            : "bg-red-400/30 text-red-500"
                             } rounded-full px-2  pr-1 mt-6`}
                     >
                         <p>{profitpercent}%</p>

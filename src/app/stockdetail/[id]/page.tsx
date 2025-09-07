@@ -1,6 +1,7 @@
 import AnalystRatings from "@/Components/Analyst_rating";
 import Candlechart from "@/Components/Candlechart";
 import Navbar from "@/Components/Navbar";
+import { getuserfromcookies } from "@/helper";
 import prismaclient from "@/services/prisma";
 import Link from "next/link";
 
@@ -12,33 +13,34 @@ function generateRandomPercentages() {
 }
 
 type Stock = {
-    id : string
-    name : string,
-    exchange : string,
-    symbol:string
-    price : number | null,
-    currentPrice : number,
+    id: string
+    name: string,
+    exchange: string,
+    symbol: string
+    price: number | null,
+    currentPrice: number,
 } | null;
 
-type StockDetail = (Stock 
+type StockDetail = (Stock
 ) | null;
 
 export default async function Detail({ params }: { params: { id: string } }) {
     const id = params.id;
+    const user = await getuserfromcookies();
 
     const res = await fetch("https://stock-portfolio-tracker-navy.vercel.app/api/stocks/" + id);
     const data = await res.json();
-    const stockdetail :  StockDetail | null = await prismaclient.stock.findUnique({
+    const stockdetail: StockDetail | null = await prismaclient.stock.findUnique({
         where: {
             id: id
         },
-     
+
     });
-      if(!stockdetail){
-       return (
-        <p>Loading.....</p>
-       )
-      }
+    if (!stockdetail) {
+        return (
+            <p>Loading.....</p>
+        )
+    }
     const { buy, hold, sell } = generateRandomPercentages();
     const value = Math.floor(Math.random() * 91) + 10;
 
@@ -57,7 +59,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
             <div className="mt-2  overflow-y-hidden ">
 
 
-                <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[1000px] w-[90%]  ">
+                <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[1055px] w-[90%]  ">
 
                     <div>
 
@@ -70,27 +72,37 @@ export default async function Detail({ params }: { params: { id: string } }) {
 
                     </div>
 
-                    <div>
+                    <div className="mt-0 md:mt-2">
 
-                        <Link href={"/addtransaction/" + stockdetail?.id}
-                            className=" bg-green-600 hover:bg-green-700 text-white font-semibold md:py-2 py-1 md:px-4 px-1 rounded" >
-                            Add Transaction
-                        </Link>
+                        {user ? (
+                            <Link href={"/addtransaction/" + stockdetail?.id}
 
+                                className="bg-green-600 hover:bg-green-700 text-white font-semibold md:py-2 py-1 md:px-4 px-1 rounded"
+                            >
+                                Add Transaction
+                            </Link>
+                        ) : (
+                            <Link
+                                href="/login"
+                                className="bg-green-600 hover:bg-green-700 text-white font-semibold md:py-2 py-1 md:px-4 px-1 rounded"
+                            >
+                                Add Transaction
+                            </Link>
+                        )}
                     </div>
 
                 </div>
 
                 <main className="flex-1 md:-ml-4 ml-2  text-white bg-gray-70">
 
-                    <section className="-mt-4 md:w-[1000px]  md-mr-0 md:mr-16 rounded shadow">
+                    <section className="-mt-4 md:w-[1080px] rounded shadow">
 
-                        <Candlechart data={data.data}  />
+                        <Candlechart data={data.data} />
 
                     </section>
 
-                  <AnalystRatings buy={buy} sell={sell} hold={hold} value={value}/>
-                  
+                    <AnalystRatings buy={buy} sell={sell} hold={hold} value={value} />
+
                 </main>
 
             </div>

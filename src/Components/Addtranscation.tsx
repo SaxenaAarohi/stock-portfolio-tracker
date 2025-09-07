@@ -1,17 +1,22 @@
 "use client"
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useUser } from '@/Context/Usercontext';
+import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import Navbar from './Navbar';
 
 type Stock = {
     id: string
     name: string,
     exchange: string,
-    symbol : string,
-    price : number | null,
+    symbol: string,
+    price: number | null,
     currentPrice: number,
-} 
+}
 
 export default function ProductForm({ stock }: { stock: Stock | null }) {
+
+    const { user } = useUser();
 
     const [name, setName] = useState<string>(stock?.name || '');
     const [exchange, setExchange] = useState<string>(stock?.exchange || '');
@@ -25,7 +30,7 @@ export default function ProductForm({ stock }: { stock: Stock | null }) {
 
     useEffect(() => {
         setTotal(quantity * currentPrice);
-    }, [quantity,currentPrice]);
+    }, [quantity, currentPrice]);
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setQuantity(Number(e.target.value));
@@ -37,6 +42,7 @@ export default function ProductForm({ stock }: { stock: Stock | null }) {
             const response = await fetch('/api/transcation', {
                 method: 'POST',
                 body: JSON.stringify({
+                    userId: user?.id,
                     quantity,
                     price: currentPrice,
                     type: transactionType.toUpperCase(),
@@ -48,90 +54,98 @@ export default function ProductForm({ stock }: { stock: Stock | null }) {
             });
             const res = await response.json();
             if (res.success) {
-                alert('Transaction added successfully!');
+                toast(
+                    <div className="text-white font-bold">
+                        Transaction added successfully!
+                    </div>,
+                    {
+                        icon: false,
+                        closeButton: true,
+                        className: "bg-gray-800/40 text-white shadow-lg rounded p-4",
+                        progressClassName: "bg-white",
+                    }
+                );
+
                 setName('');
                 setExchange('');
                 setQuantity(0);
                 setTotal(0);
                 setTransactionType('buy');
+                redirect("/");
             } else {
-                alert('Failed to add transaction.');
+                toast('Failed to add transaction.');
             }
         }
         else {
-            alert("Quantity should be g*reater than 0")
+            toast("Quantity should be g*reater than 0")
         }
     }
 
-    if(!stock) return <p>Loading...</p>;
+    if (!stock) return <p>Loading...</p>;
     return (
-        <div className="flex justify-center items-center min-h-screen ">
+        <div className=" justify-center items-center min-h-screen ">
 
             <Navbar title={title} line={des} />
 
-            <form onSubmit={handleSubmit} className="space-y-6 w-full" >
+            <form onSubmit={handleSubmit} className="space-y-10 w-full max-w-5xl">
 
-                <div className='flex gap-80'>
-
-                    <div>
-                        <label htmlFor="name" className=" text-sm font-medium  text-gray-200">Name</label>
+                <div className="flex flex-wrap mt-4 gap-10">
+                    <div className="flex-1 min-w-[200px]">
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-300">Name</label>
                         <input
                             type="text"
                             id="name"
                             defaultValue={name}
-                            className="w-full  border border-gray-300 mt-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="mt-2 w-full p-2 border border-gray-600 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
                         />
                     </div>
 
-                    <div>
-                        <label htmlFor="exchange" className=" text-sm font-medium text-gray-200">Exchange</label>
+                    <div className="flex-1 min-w-[200px]">
+                        <label htmlFor="exchange" className="block text-sm font-medium text-gray-300">Exchange</label>
                         <input
                             type="text"
                             id="exchange"
                             defaultValue={exchange}
-                            className="w-full  p-1 border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="mt-2 w-full p-2 border border-gray-600 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
                         />
                     </div>
-
                 </div>
 
 
-                <div className='flex gap-74'>
-
-                    <div>
-                        <label htmlFor="quantity" className="text-sm font-medium text-gray-200">Quantity</label>
+                <div className="flex flex-wrap gap-10">
+                    <div className="flex-1 min-w-[200px]">
+                        <label htmlFor="quantity" className="block text-sm font-medium text-gray-300">Quantity</label>
                         <input
                             type="number"
                             id="quantity"
                             value={quantity}
                             onChange={handleQuantityChange}
-                            className="w-full p-1 border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="mt-2 w-full p-2 border border-gray-600 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
                         />
                     </div>
 
-                    <div>
-                        <label htmlFor="currentPrice" className=" text-sm font-medium text-gray-200">Current Price ($)</label>
+                    <div className="flex-1 min-w-[200px]">
+                        <label htmlFor="currentPrice" className="block text-sm font-medium text-gray-300">Current Price ($)</label>
                         <input
                             type="number"
                             id="currentPrice"
                             defaultValue={currentPrice}
-                            className="w-full p-1  border  mt-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="mt-2 w-full p-2 border border-gray-600 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
                         />
                     </div>
-
                 </div>
 
-                <div>
-                    <label htmlFor="transactionType" className=" text-sm font-medium text-gray-200">Transaction Type</label>
+                <div className="flex flex-col">
+                    <label htmlFor="transactionType" className="text-sm font-medium text-gray-300">Transaction Type</label>
                     <select
                         id="transactionType"
                         value={transactionType}
-                        onChange={(e: ChangeEvent<HTMLSelectElement>) => setTransactionType(e.target.value as "buy" | "sell")}
-                        className="w-full p-1  mt-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        onChange={(e) => setTransactionType(e.target.value as "buy" | "sell")}
+                        className="mt-2 w-full p-2 border border-gray-600 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
                         <option value="buy">Buy</option>
                         <option value="sell">Sell</option>
@@ -139,15 +153,17 @@ export default function ProductForm({ stock }: { stock: Stock | null }) {
                 </div>
 
                 <div>
-                    <h3 className="text-xl font-semibold text-gray-200">Total : ${total}</h3>
+                    <h3 className="text-xl font-semibold text-gray-300">Total: ${total}</h3>
                 </div>
 
-                <button
-                    type="submit"
-                    className="w-[60%] py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-200"
-                >
-                    Buy
-                </button>
+                <div>
+                    <button
+                        type="submit"
+                        className="w-[15%] py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition duration-300"
+                    >
+                        Buy
+                    </button>
+                </div>
             </form>
 
         </div>

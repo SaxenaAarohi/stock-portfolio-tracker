@@ -1,9 +1,17 @@
 import prismaclient from "@/services/prisma";
 import Temporary from "./Temporary";
 
-export default async function Other_Stocks() {
+type Userwithall = {
+    id: string,
+    name : string,
+    email : string,
+    password : string
+}
+
+export default async function Other_Stocks({user} : {user : Userwithall | null}) {
  
   const Other_Stocks = await prismaclient.transaction.findMany({
+    where : { userId : user?.id},
     include : { stock: true },
   })
 

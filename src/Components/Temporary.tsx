@@ -43,7 +43,7 @@ export default function Temporary({ data }: { data: Data }) {
   }
 
   const buyprice = Number(data.price.toFixed(2));
-  const quantity = data.quantity;
+  const quantity = data?.quantity;
   const total = data.total.toFixed(2);
   const currprice = data?.stock?.price || 0;
 
@@ -74,7 +74,7 @@ export default function Temporary({ data }: { data: Data }) {
       <div className="text-right">
         
         <p title="Invested amount" className="text-xl font-bold text-white">
-          ${total}
+          {total}
         </p>
 
         <p
