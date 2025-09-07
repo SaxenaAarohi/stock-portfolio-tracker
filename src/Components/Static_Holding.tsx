@@ -27,35 +27,45 @@ const title = "Guest Holding";
   }, []);
 
   return (
-    <div className="h-screen flex flex-col">
+   <div className="h-screen flex md:w-full w-screen flex-col overflow-hidden">
 
-      <div>
+    
         <Navbar title={title} line={des} />
-      </div>
+      
+       <div className="flex flex-col items-center md:mt-5 mt-3  w-full overflow-y-auto 
+    [&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar]:w-[9px]
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
+    overflow-x-hidden px-2">
 
-      <div className="flex flex-col md:mt-5 mt-3 overflow-x-hidden md:w-full md:ml-0 ml-0  md:mr-0 mr-2 overflow-y-auto scrollbar-hide w-[480px]">
-
-        <div className="flex md:flex-row flex-col md:gap-4  mb-4">
+        <div className="flex md:flex-row flex-col md:gap-4 gap-4 mb-4 w-full max-w-screen-xl">
 
           {loadingCharts ? (
-            <div className="animate-pulse bg-gray-800  h-64 md:w-2/3 w-[320px]" />
+            <div className="animate-pulse bg-gray-800 md:ml-0 ml-9 h-64 md:w-2/3 w-[320px]" />
           ) : (
             <HoldingsBarChart isguest={true} />
           )}
 
           {loadingPie ? (
-            <div className="animate-pulse bg-gray-800   h-64 md:w-1/3 mr-6 w-[320px]  " />
+            <div className="animate-pulse bg-gray-800 md:ml-0 ml-9  h-64 md:w-1/3 mr-6 w-[320px]  " />
           ) : (
             <StaticPieChart isguest={true} />
           )}
 
         </div>
 
+<div className="w-full max-w-screen-xl">
         {loadingTable ? (
-          <div className="animate-pulse bg-gray-800  h-60 md:w-[98%]  w-[320px]" />
+          <div className="animate-pulse bg-gray-800 md:ml-0 ml-9 h-60 md:w-[98%]  w-[320px]" />
         ) : (
           <HoldingsTable isguest={true}/>
         )}
+        </div>
       </div>
 
     </div>

@@ -31,7 +31,6 @@ return (
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
     overflow-x-hidden px-2">
       
-      {/* Charts Container */}
       <div className="flex md:flex-row flex-col md:gap-4 gap-4 mb-4 w-full max-w-screen-xl">
         <Suspense
           fallback={
@@ -50,7 +49,6 @@ return (
         </Suspense>
       </div>
 
-      {/* Table Container */}
       <div className="w-full max-w-screen-xl">
         <Suspense
           fallback={
