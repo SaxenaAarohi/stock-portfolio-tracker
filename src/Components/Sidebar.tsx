@@ -31,7 +31,7 @@ export default function Sidebar() {
       </button>
 
       <div
-        className={`fixed md:static top-12 left-0 h-full md:h-screen w-56 md:bg-gray-900/40  bg-black border border-gray-800 text-white 
+        className={`flex flex-col justify-between fixed md:static top-12 left-0 h-screen w-56 md:bg-gray-900/40  bg-black border border-gray-800 text-white 
     transform transition-transform duration-300 z-40
     ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 `}
       >
