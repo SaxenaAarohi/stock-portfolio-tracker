@@ -7,6 +7,7 @@ type typeofHoldings = {
   quantity : number,
   price : number,
   stock : {
+    id:string
     symbol : string,
     name : string,
     price : number
@@ -14,12 +15,12 @@ type typeofHoldings = {
 }
 
 const guestHoldings : typeofHoldings[] = [
-  { stock: { symbol: "AAPL", name: "Apple Inc.", price: 180 }, quantity: 20, price: 150 },
-  { stock: { symbol: "MSFT", name: "Microsoft Coperation", price: 250 }, quantity: 10, price: 220 },
-  { stock: { symbol: "AMZN", name: "Amazon.com Inc.", price: 140 }, quantity: 15, price: 130 },
-  { stock: { symbol: "TSLA", name: "Tesla Inc.", price: 800 }, quantity: 8, price: 700 },
-  { stock: { symbol: "NFLX", name: "Netflix Inc.", price: 400 }, quantity: 12, price: 350 },
-    { stock: { symbol: "GOOGL", name: "Alphabet Inc.", price: 2800 }, quantity: 5, price: 2600 },
+  { stock: {id:"68aa02b93c1bf3c4974c681f", symbol: "AAPL", name: "Apple Inc.", price: 180 }, quantity: 20, price: 150 },
+  { stock: { id:"68aa02b93c1bf3c4974c6820", symbol: "MSFT", name: "Microsoft Coperation", price: 250 }, quantity: 10, price: 220 },
+  { stock: { id:"68aa02b93c1bf3c4974c6822", symbol: "AMZN", name: "Amazon.com Inc.", price: 140 }, quantity: 15, price: 130 },
+  { stock: { id:"68aa02b93c1bf3c4974c6823", symbol: "TSLA", name: "Tesla Inc.", price: 800 }, quantity: 8, price: 700 },
+  { stock: { id:"68aa02b93c1bf3c4974c6825", symbol: "NFLX", name: "Netflix Inc.", price: 400 }, quantity: 12, price: 350 },
+    { stock: {id:"68aa02b93c1bf3c4974c6821",  symbol: "GOOGL", name: "Alphabet Inc.", price: 2800 }, quantity: 5, price: 2600 },
   
 ];
 
@@ -71,7 +72,8 @@ const HoldingsTable = ({ isguest } : {isguest : boolean}) => {
             return (
               <tr
                 key={index}
-                className="border-t text-sm text-gray-200 hover:bg-gray-500"
+                 onClick={() => window.location.href = `stockdetail/${stock.stock.id}`} 
+                className=" text-sm text-gray-200 hover:bg-gray-500"
               >
                 <td className="py-3 md:px-8 px-3 font-medium">{stock.stock.symbol}</td>
                 <td className="py-3 md:px-8 px-3">{stock.stock.name}</td>
@@ -89,7 +91,6 @@ const HoldingsTable = ({ isguest } : {isguest : boolean}) => {
       </table>
     </div>
 
-    {/* Pagination Controls */}
     <div className="flex justify-center gap-2 mt-4">
       <button
         onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}

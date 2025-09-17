@@ -1,4 +1,5 @@
 "use client";
+import { useUser } from "@/Context/Usercontext";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,6 +9,7 @@ import { toast } from "react-toastify";
 
 export default function Sidebar() {
 
+  const { setUser, user } = useUser();
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +18,7 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     await fetch("/api/logout", { method: "POST" });
+    setUser(null);
     toast("Logges Out Successfully");
     router.replace("/login");
     router.refresh();
@@ -85,22 +88,31 @@ export default function Sidebar() {
           </ul>
         </nav>
 
-        <div className="flex flex-col gap-3 mb-4  ">
-          <Link
-            href="/login"
-            className="bg-blue-600 mx-2  hover:bg-blue-700  text-center rounded p-2 font-semibold block"
-            onClick={() => setIsOpen(false)}
-          >
-            Login
-          </Link>
+        {/* <div className="flex flex-col gap-3 mb-4  ">
+          */}
+        {
+          user ? (
+            <button
+              className="bg-red-600 mx-2 mb-4 hover:bg-red-700  text-center rounded p-2 font-semibold block"
+              onClick={handleLogout}
+            >
+              LogOut
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="bg-blue-600 mx-2 mb-4 hover:bg-blue-700  text-center rounded p-2 font-semibold block"
+              onClick={() => setIsOpen(false)}
+            >
+              Login
+            </Link>
+          )
+        }
 
-          <button
-            className="bg-red-600 mx-2 hover:bg-red-700  text-center rounded p-2 font-semibold block"
-            onClick={handleLogout}
-          >
-            LogOut
-          </button>
-        </div>
+
+
+        {/* </div> */}
+
       </div>
     </>
   );
