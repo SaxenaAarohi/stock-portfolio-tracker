@@ -48,8 +48,9 @@ export default function News() {
                       src={item.imageUrl}
                       width={112}
                       height={80}
-                      className="object-cover rounded-sm"
+                      className="object-cover  rounded-sm"
                     />
+                    
                   )}
 
                   <div className="flex flex-col justify-center">

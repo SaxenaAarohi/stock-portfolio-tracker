@@ -31,7 +31,7 @@ export default function Sidebar() {
       </button>
 
       <div
-        className={`flex flex-col justify-between fixed md:static top-12 left-0 h-screen w-56 md:bg-gray-900/40  bg-black border border-gray-800 text-white 
+        className={`flex flex-col justify-between fixed md:static top-12 left-0 h-[92%] md:h-screen w-56 md:bg-gray-900/40  bg-black border border-gray-800 text-white 
     transform transition-transform duration-300 z-40
     ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 `}
       >
@@ -85,17 +85,17 @@ export default function Sidebar() {
           </ul>
         </nav>
 
-        <div className="flex flex-col  ">
+        <div className="flex flex-col gap-3 mb-4  ">
           <Link
             href="/login"
-            className="bg-blue-600 mx-2 mt-120 md:mt-70 hover:bg-blue-700  text-center rounded p-2 font-semibold block"
+            className="bg-blue-600 mx-2  hover:bg-blue-700  text-center rounded p-2 font-semibold block"
             onClick={() => setIsOpen(false)}
           >
             Login
           </Link>
 
           <button
-            className="bg-red-600 mx-2 mt-4 hover:bg-red-700  text-center rounded p-2 font-semibold block"
+            className="bg-red-600 mx-2 hover:bg-red-700  text-center rounded p-2 font-semibold block"
             onClick={handleLogout}
           >
             LogOut
