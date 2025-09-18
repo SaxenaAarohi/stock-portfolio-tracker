@@ -56,7 +56,7 @@ export default function Temporary({ data }: { data: Data }) {
   return (
     <Link
       href={`stockdetail/${data.stock.id}`}
-      className="flex items-center justify-between p-3 bg-gray-900/40 border border-gray-800 rounded-sm  shadow-lg md:w-64 w-40 overflow-hidden"
+      className="flex items-center justify-between p-3 bg-gray-900/40 border border-gray-800 rounded-sm  shadow-lg md:w-[23%] w-40 overflow-hidden"
     >
         
         <div className="overflow-hidden">

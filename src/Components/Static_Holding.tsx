@@ -32,7 +32,7 @@ const title = "Guest Holding";
     
         <Navbar title={title} line={des} />
       
-       <div className="flex flex-col items-center md:mt-5 mt-3  w-full overflow-y-auto 
+       <div className="flex flex-col items-center md:mt-5 mt-3 h-screen w-full overflow-y-auto 
     [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar]:w-[9px]
   [&::-webkit-scrollbar-track]:rounded-full
@@ -43,25 +43,25 @@ const title = "Guest Holding";
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
     overflow-x-hidden px-2">
 
-        <div className="flex md:flex-row flex-col md:gap-4 gap-4 mb-4 w-full max-w-screen-xl">
+        <div className="flex md:flex-row flex-col md:gap-4 gap-4 mb-4 w-full  max-w-screen-xl">
 
           {loadingCharts ? (
-            <div className="animate-pulse bg-gray-800 md:ml-0 ml-9 h-64 md:w-2/3 w-[320px]" />
+            <div className="animate-pulse bg-gray-800 md:ml-0 ml-9 h-full md:w-2/3 w-[320px]" />
           ) : (
             <HoldingsBarChart isguest={true} />
           )}
 
           {loadingPie ? (
-            <div className="animate-pulse bg-gray-800 md:ml-0 ml-9  h-64 md:w-1/3 mr-6 w-[320px]  " />
+            <div className="animate-pulse bg-gray-800 md:ml-0 ml-9  h-full md:w-1/3 mr-6 w-[320px]  " />
           ) : (
             <StaticPieChart isguest={true} />
           )}
 
         </div>
 
-<div className="w-full max-w-screen-xl">
+<div className="w-full h-[60%] max-w-screen-xl">
         {loadingTable ? (
-          <div className="animate-pulse bg-gray-800 md:ml-0 ml-9 h-60 md:w-[98%]  w-[320px]" />
+          <div className="animate-pulse bg-gray-800 md:ml-0 ml-9 h-full md:w-[98%]  w-[320px]" />
         ) : (
           <HoldingsTable isguest={true}/>
         )}

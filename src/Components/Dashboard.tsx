@@ -23,7 +23,7 @@ export default async function Dashboard() {
           <Navbar title={title} line={des} />
         </div>
 
-        <div className="flex flex-col mt-6 overflow-y-auto scrollbar-hide w-full">
+        <div className="flex flex-col h-full mt-6 overflow-y-auto scrollbar-hide w-full">
           <div className="flex flex-col md:flex-row gap-4">
             <Chart_Section />
             <Summary />

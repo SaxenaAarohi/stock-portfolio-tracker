@@ -38,7 +38,7 @@ export default function Displaystock({ stock }: { stock: Stock }) {
   return (
     <Link
       href={`/stockdetail/${stock.id}`}
-      className="flex justify-between bg-gray-900 border border-gray-800 rounded-md md:px-4 px-2 py-4 shadow-lg md:w-64 w-46 overflow-hidden"
+      className="flex justify-between bg-gray-900 border border-gray-800 rounded-md md:px-4 px-2 py-4 shadow-lg md:w-[24%] w-46 overflow-hidden"
     >
       <div className="flex justify-between items-center">
         <div>

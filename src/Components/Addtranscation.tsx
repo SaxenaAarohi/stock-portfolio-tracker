@@ -101,7 +101,7 @@ export default function ProductForm({ stock }: { stock: Stock | null }) {
                         />
                     </div>
 
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-[40%]">
                         <label htmlFor="exchange" className="block text-sm font-medium text-gray-300">Exchange</label>
                         <input
                             type="text"

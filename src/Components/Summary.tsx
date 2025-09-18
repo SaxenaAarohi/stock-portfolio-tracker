@@ -32,7 +32,7 @@ export default function Summary() {
             try {
 
                  const data = await fetch("https://stock-portfolio-tracker-navy.vercel.app/api/transcation");
-               // const data = await fetch("http://localhost:3000/api/transcation");
+                //const data = await fetch("http://localhost:3000/api/transcation");
                 const res = await data.json();
                 const trans = res.data;
 
@@ -84,7 +84,7 @@ export default function Summary() {
 
     return (
         <div>
-            <div className="bg-gray-900/40 rounded-sm px-4 py-4 border mr-2 md:ml-0 ml-2 border-gray-800">
+            <div className=" bg-gray-900/40 rounded-sm px-4 py-4 border mr-2 md:ml-0 ml-2 border-gray-800">
                 <h4 className="text-xs">PORTFOLIO</h4>
                 <p className="text-4xl py-3 ">$ {profit}</p>
 

@@ -17,7 +17,7 @@ export default async function Other_Stocks({user} : {user : Userwithall | null})
 
   return (
 
-      <div className="flex flex-wrap md:justify-start  justify-center gap-4 mt-4  ">
+      <div className="flex flex-wrap md:justify-start  justify-center gap-5 mt-4  ">
           {Other_Stocks.map((stock) => (
             <Temporary key={stock.id} data={stock}/>
           ))}

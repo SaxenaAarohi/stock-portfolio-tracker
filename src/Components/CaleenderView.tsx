@@ -63,8 +63,8 @@ export default function HoldingsBarChart({ isguest } : {isguest : boolean}) {
   }, [isguest]);
 
   return (
-    <div className="w-[380px] md:w-full focus:outline-none max-w-2xl md:-ml-8 text-white  py-4 rounded-lg shadow">
-      <ResponsiveContainer width="100%" height={300}>
+    <div className="w-[380px] md:w-full focus:outline-none max-w-2xl md:-ml-8 text-white h-full py-4 rounded-lg shadow">
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart data={holdings}>
           <XAxis dataKey="name" stroke="#ccc" />
           <YAxis stroke="#ccc" />

@@ -59,7 +59,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
             <div className="mt-2  overflow-y-hidden ">
 
 
-                <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[1055px] w-[90%]  ">
+                <div className=" flex justify-between md:ml-0 ml-6 items-center md:w-[98%] w-[90%]  ">
 
                     <div>
 
@@ -95,7 +95,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
 
                 <main className="flex-1 md:-ml-4 ml-5   text-white bg-gray-70">
 
-                    <section className="mt-2 md:-mt-4 md:w-[1080px] rounded shadow">
+                    <section className="mt-2 md:-mt-4 md:w-[98%] rounded shadow">
 
                         <Candlechart data={data.data} />
 
