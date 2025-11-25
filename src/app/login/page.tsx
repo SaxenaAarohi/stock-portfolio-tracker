@@ -131,14 +131,7 @@ export default function AuthPage() {
           </button>
         </p>
 
-        <div className="mt-6 text-center">
-          <button
-            onClick={handleGuestLogin}
-            className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 rounded-xl transition duration-200 shadow-md"
-          >
-            Continue as Guest
-          </button>
-        </div>
+    
       </div>
     </div>
   );
