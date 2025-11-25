@@ -34,10 +34,6 @@ export default async function Dashboard() {
     );
   }
 
-  const isGuest = cookieStore.get("guest")?.value === "true";
-  if (isGuest) {
     return <GuestDashboard />;
-  }
 
-  redirect("/login");
 }
