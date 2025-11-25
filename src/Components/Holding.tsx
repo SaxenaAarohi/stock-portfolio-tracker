@@ -64,11 +64,6 @@ return (
 
   }
 
-  const isguest = cookieStore.get("guest")?.value === "true";
-
-  if (isguest) {
     return <Static_Holding />;
-  }
-
-  redirect("/login");
+ 
 }
