@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       password: body.password,
     };
 
-    const res = await prisma.user.create({
+    const res = await prismaclient.user.create({
       data: data,
     });
 
